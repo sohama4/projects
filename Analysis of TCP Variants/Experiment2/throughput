@@ -1,0 +1,55 @@
+#!/usr/bin/awk -f
+BEGIN {
+  count1=0
+  transmitted1=0
+  starttime1=0
+  stoptime1=0
+
+  count2=0
+  transmitted2=0
+  starttime2=0
+  stoptime2=0
+}
+
+
+
+{
+
+  if($5 == "tcp" && $9 == "0.0" && $1 == "-" && $10 == "3.0" && count1=0)
+{
+starttime1=$2
+count1++
+}
+
+  if($5 == "tcp" && $9 == "4.0" && $1 == "-" && $10 == "5.0" && count2=0)
+{
+starttime2=$2
+count2++
+}
+
+  if($5 == "tcp" && $3 =="2" && $4 == "3" && $9 == "0.0" && $1 == "r" && $10 == "3.0")
+{
+if($2 > stoptime1)
+stoptime1=$2
+}
+  if($1 == "r" && $5 == "tcp" && $9 == "0.0" && $3 == "2" && $4 == "3" && $10 == "3.0")
+{
+transmitted1=transmitted1+$6	
+}
+
+  if($5 == "tcp" && $3 == "2" && $4 == "5" && $9 == "4.0" && $1 == "r" && $10 == "5.0")
+{
+if($2 > stoptime2)
+stoptime2=$2
+}
+  if($1 == "r" && $5 == "tcp" && $9 == "4.0" && $3 == "2" && $4 == "5" && $10 == "5.0")
+{
+transmitted2=transmitted2+$6	
+}
+
+}
+
+END {
+printf("%.2f\t%.2f", (transmitted1/(stoptime1 - starttime1))*8/1024, (transmitted2/(stoptime2 - starttime2))*8/1024);
+}
+

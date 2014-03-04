@@ -1,0 +1,16 @@
+Team members: Kapil Deshpande and Soham Aurangabadkar
+
+To generate graphs, from root folder 3
+./run
+
+The graphs for each experiment will be generated in its respective directory (.jpg)
+The values used to plot the graphs are stored as *.dat in the respective directories with the proper names
+
+Approach:
+
+1. Implement the given topology with oTcl and ns2
+2. Vary the CBR inputs to the tcl files for the different variants required
+3. The simulation will generate a .tr file for each input
+4. Parse each .tr file to recover the parameters to calculate throughput, dropcount and latency using the respective awk scripts
+5. Store the results of the parsing in .dat file
+6. Used GNUPlot to generate graphs using the .dat file

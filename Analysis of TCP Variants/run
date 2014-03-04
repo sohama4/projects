@@ -1,0 +1,9 @@
+#!/bin/sh
+export PATH=$PATH:/course/cs4700f12/ns-allinone-2.35/bin
+rm -f *~
+cd Experiment1
+./Exp1
+cd ../Experiment2
+./Exp2
+cd ../Experiment3
+./Exp3

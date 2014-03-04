@@ -1,0 +1,24 @@
+#!/usr/bin/awk -f
+BEGIN {
+
+  countsent=0
+  countreceived=0
+  latency=0
+}
+{
+  if($1 == "-" && $3 == "0" && $4 == "1" && $5 == "tcp" && $9 == "0.0" && $10 == "3.0")
+  {
+  starttime[$11] = $2
+  }
+
+  if($1 == "r" && $3 == "1" && $4 == "0" && $5 == "ack" && $9 == "3.0" && $10 == "0.0")
+  {
+  countreceived = countreceived + 1
+  endtime[$11] = $2
+  latency=latency+(endtime[$11] - starttime[$11])
+  }
+}
+END {
+printf("%f", latency*1000/countreceived);
+}
+

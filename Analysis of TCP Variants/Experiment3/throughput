@@ -1,0 +1,74 @@
+#!/usr/bin/awk -f
+BEGIN {
+  count=0
+  transmitted=0
+  starttime=0
+  stoptime=0
+  throughput=0
+
+  count1=0
+  transmitted1=0
+  starttime1=0
+  stoptime1=0
+  throughput1=0
+
+  intime=1
+}
+
+{
+
+	if($5 == "tcp" && $3 == 0 && $4 == 1 && $9 == "0.0" && $1 == "-" && $10 == "3.0" && count == 0)
+	{
+	starttime=$2
+	count++
+	}
+        if($5 == "cbr" && $3 == 4 && $4 == 1 && $1 == "-" && $9 == "4.0" && $10 == "5.0" && count1 == 0)
+	{
+	starttime1=$2
+	count1++
+	}
+
+	if($5 == "tcp" && $3 == "2" && $4 == "3" && $9 == "0.0" && $1 == "r" && $10 == "3.0")
+	{
+	if($2 > stoptime)
+	stoptime=$2
+	}
+
+	if($5 == "cbr" && $3 == "2" && $4 == "5" && $9 == "4.0" && $1 == "r" && $10 == "5.0")
+	{
+	if($2 > stoptime1)
+	stoptime1=$2
+	}
+        if($2 < intime)
+        {
+ 	if($1 == "r" && $5 == "tcp" && $9 == "0.0" && $3 == "2" && $4 == "3" && $10 == "3.0")
+	{
+	transmitted=transmitted+$6	
+	}
+
+ 	if($1 == "r" && $5 == "cbr" && $9 == "4.0" && $3 == "2" && $4 == "5" && $10 == "5.0")
+	{
+	transmitted1=transmitted1+$6	
+	}
+        }
+        else
+        {
+        intime+=1
+        throughput = (transmitted/(stoptime - starttime))*8/1024
+	if((stoptime1 - starttime1) > 0)
+	{
+ 	throughput1 = (transmitted1/(stoptime1 - starttime1))*8/1024
+	}
+	printf("%f\t%f\n", throughput,throughput1);
+	transmitted = 0 
+        count = 0
+	transmitted1 = 0 
+        count1 = 0
+
+	}	
+}
+
+END {
+
+}
+

@@ -1,0 +1,85 @@
+#!/bin/sh
+set terminal jpeg enhanced font helvetica 10
+set output "RenoRenoThroughput.jpg"
+set title "Throughput Comparison when TCP Reno is run alongside TCP Reno"
+set xlabel "CBR Rate in Megabits/second"
+set ylabel "Throughput"
+plot [1:10] "RenoRenoThroughput.dat" u ($0+1):1 title "Reno Throughput between nodes 1 and 4" with linespoints, "RenoRenoThroughput.dat" u ($0+1):2 title "Reno Throughput between nodes 5 and 6" with linespoints
+
+set terminal jpeg enhanced font helvetica 10
+set output "VegasVegasThroughput.jpg"
+set title "Throughput Comparison when TCP Vegas is run alongside TCP Vegas"
+set xlabel "CBR Rate in Megabits/second"
+set ylabel "Throughput"
+plot [1:10] "VegasVegasThroughput.dat" u ($0+1):1 title "Vegas Throughput between nodes 1 and 4" with linespoints, "VegasVegasThroughput.dat" u ($0+1):2 title "Vegas Throughput between nodes 5 and 6" with linespoints
+
+set terminal jpeg enhanced font helvetica 10
+set output "NewrenoVegasThroughput.jpg"
+set title "Throughput Comparison when TCP Newreno is run alongside TCP Vegas"
+set xlabel "CBR Rate in Megabits/second"
+set ylabel "Throughput"
+plot [1:10] "NewrenoVegasThroughput.dat" u ($0+1):1 title "Newreno Throughput between nodes 1 and 4" with linespoints, "NewrenoVegasThroughput.dat" u ($0+1):2 title "Vegas Throughput between nodes 5 and 6" with linespoints
+
+set terminal jpeg enhanced font helvetica 10
+set output "NewrenoRenoThroughput.jpg"
+set title "Throughput Comparison when TCP Newreno is run alongside TCP Reno"
+set xlabel "CBR Rate in Megabits/second"
+set ylabel "Throughput"
+plot [1:10] "NewrenoRenoThroughput.dat" u ($0+1):1 title "Newreno Throughput between nodes 1 and 4" with linespoints, "NewrenoRenoThroughput.dat" u ($0+1):2 title "Reno Throughput between nodes 5 and 6" with linespoints
+
+set terminal jpeg enhanced font helvetica 10
+set output "RenoRenoLatency.jpg"
+set title "Latency Comparison when TCP Reno is run alongside TCP Reno"
+set xlabel "CBR Rate in Megabits/second"
+set ylabel "Latency"
+plot [1:10] "RenoRenoLatency.dat" u ($0+1):1 title "Reno flow between nodes 1 and 4" with linespoints, "RenoRenoLatency.dat" u ($0+1):2 title "Reno flow between nodes 5 and 6" with linespoints
+
+set terminal jpeg enhanced font helvetica 10
+set output "VegasVegasLatency.jpg"
+set title "Latency Comparison when TCP Vegas is run alongside TCP Vegas"
+set xlabel "CBR Rate in Megabits/second"
+set ylabel "Latency"
+plot [1:10] "VegasVegasLatency.dat" u ($0+1):1 title "Vegas flow between nodes 1 and 4" with linespoints, "VegasVegasLatency.dat" u ($0+1):2 title "Vegas flow between nodes 5 and 6" with linespoints
+
+set terminal jpeg enhanced font helvetica 10
+set output "NewrenoVegasLatency.jpg"
+set title "Latency Comparison when TCP Newreno is run alongside TCP Vegas"
+set xlabel "CBR Rate in Megabits/second"
+set ylabel "Latency"
+plot [1:10] "NewrenoVegasLatency.dat" u ($0+1):1 title "Newreno flow between nodes 1 and 4" with linespoints, "NewrenoVegasLatency.dat" u ($0+1):2 title "Vegas flow between nodes 5 and 6" with linespoints
+
+set terminal jpeg enhanced font helvetica 10
+set output "NewrenoRenoLatency.jpg"
+set title "Latency Comparison when TCP Newreno is run alongside TCP Reno"
+set xlabel "CBR Rate in Megabits/second"
+set ylabel "Latency"
+plot [1:10] "NewrenoRenoLatency.dat" u ($0+1):1 title "Newreno flow between nodes 1 and 4" with linespoints, "NewrenoRenoLatency.dat" u ($0+1):2 title "Reno flow between nodes 5 and 6" with linespoints
+
+
+set terminal jpeg enhanced font helvetica 10
+set output "RenoRenoDropcount.jpg"
+set title "Dropcount Comparison when TCP Reno is run alongside TCP Reno"
+set xlabel "CBR Rate in Megabits/second"
+set ylabel "Dropcount"
+plot [1:10] "RenoRenoDropcount.dat" u ($0+1):1 title "Reno flow between nodes 1 and 4" with linespoints, "RenoRenoDropcount.dat" u ($0+1):2 title "Reno flow between nodes 5 and 6" with linespoints
+
+set terminal jpeg enhanced font helvetica 10
+set output "VegasVegasDropcount.jpg"
+set title "Dropcount Comparison when TCP Vegas is run alongside TCP Vegas"
+set xlabel "CBR Rate in Megabits/second"
+set ylabel "Dropcount"
+plot [1:10] "VegasVegasDropcount.dat" u ($0+1):1 title "Vegas flow between nodes 1 and 4" with linespoints, "VegasVegasDropcount.dat" u ($0+1):2 title "Vegas flow between nodes 5 and 6" with linespoints
+
+set terminal jpeg enhanced font helvetica 10
+set output "NewrenoVegasDropcount.jpg"
+set title "Dropcount Comparison when TCP Newreno is run alongside TCP Vegas"
+set xlabel "CBR Rate in Megabits/second"
+set ylabel "Dropcount"
+plot [1:10] "NewrenoVegasDropcount.dat" u ($0+1):1 title "Newreno flow between nodes 1 and 4" with linespoints, "NewrenoVegasDropcount.dat" u ($0+1):2 title "Vegas flow between nodes 5 and 6" with linespoints
+
+set terminal jpeg enhanced font helvetica 10
+set output "NewrenoRenoDropcount.jpg"
+set title "Dropcount Comparison when TCP Newreno is run alongside TCP Reno"
+set xlabel "CBR Rate in Megabits/second"
+set ylabel "Dropcount"
+plot [1:10] "NewrenoRenoDropcount.dat" u ($0+1):1 title "Newreno flow between nodes 1 and 4" with linespoints, "NewrenoRenoDropcount.dat" u ($0+1):2 title "Reno flow between nodes 5 and 6" with linespoints

@@ -1,0 +1,33 @@
+#!/usr/bin/awk -f
+BEGIN {
+  count=0
+  transmitted=0
+  starttime=0
+  stoptime=0
+}
+
+{
+  if($5 == "tcp" && $9 == "0.0" && $1 == "-" && $10 == "3.0" && count=0)
+{
+starttime=$2
+count++
+}
+
+
+
+  if($5 == "tcp" && $3 == "2" && $4 == "3" && $9 == "0.0" && $1 == "r" && $10 == "3.0")
+{
+if($2 > stoptime)
+stoptime=$2
+}
+  if($1 == "r" && $5 == "tcp" && $9 == "0.0" && $3 == "2" && $4 == "3" && $10 == "3.0")
+{
+transmitted=transmitted+$6	
+}
+
+}
+
+END {
+printf("%.2f", (transmitted/(stoptime - starttime))*8/1024);
+}
+

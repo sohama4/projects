@@ -1,0 +1,54 @@
+#!/bin/bash
+rm -f *.jpg
+rm -f *.tr
+rm -f *~
+rm -f TahoeThroughput.dat
+rm -f TahoeDropcount.dat
+rm -f TahoeLatency.dat
+
+rm -f VegasThroughput.dat
+rm -f VegasDropcount.dat
+rm -f VegasLatency.dat
+
+rm -f RenoThroughput.dat
+rm -f RenoDropcount.dat
+rm -f RenoLatency.dat
+
+rm -f NewrenoThroughput.dat
+rm -f NewrenoDropcount.dat
+rm -f NewrenoLatency.dat
+for i in 1 2 3 4 5 6 7 8 9 10
+do
+   ns TCPTahoe.tcl $i
+   ./throughput Tahoe$i.tr >>TahoeThroughput.dat
+   echo >>TahoeThroughput.dat
+   ./dropcount Tahoe$i.tr >>TahoeDropcount.dat
+   echo >>TahoeDropcount.dat
+   ./latency Tahoe$i.tr >>TahoeLatency.dat
+   echo >>TahoeLatency.dat
+   ns TCPReno.tcl $i
+   ./throughput Reno$i.tr >>RenoThroughput.dat
+   echo >>RenoThroughput.dat
+   ./dropcount Reno$i.tr >>RenoDropcount.dat
+   echo >>RenoDropcount.dat
+   ./latency Reno$i.tr >>RenoLatency.dat
+   echo >>RenoLatency.dat
+   ns TCPNewreno.tcl $i
+   ./throughput Newreno$i.tr >>NewrenoThroughput.dat
+   echo >>NewrenoThroughput.dat
+   ./dropcount Newreno$i.tr >>NewrenoDropcount.dat
+   echo >>NewrenoDropcount.dat
+   ./latency Newreno$i.tr >>NewrenoLatency.dat
+   echo >>NewrenoLatency.dat
+   ns TCPVegas.tcl $i
+   ./throughput Vegas$i.tr >>VegasThroughput.dat
+   echo >>VegasThroughput.dat
+   ./dropcount Vegas$i.tr >>VegasDropcount.dat
+   echo >>VegasDropcount.dat
+   ./latency Vegas$i.tr >>VegasLatency.dat
+   echo >>VegasLatency.dat
+   rm -f *.tr
+done
+
+gnuplot plotgraph
+echo "Graphs generated in .jpg format in /Experiment1"

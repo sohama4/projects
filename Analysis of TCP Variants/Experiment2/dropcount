@@ -1,0 +1,20 @@
+#!/usr/bin/awk -f
+BEGIN {
+  count1=0
+  count2=0
+  
+}
+{
+  if($1 == "d" && $5 == "tcp" && $9 == "4.0" && $10 == "5.0")
+{
+count2++
+}
+
+  if($1 == "d" && $5 == "tcp" && $9 == "0.0" && $10 == "3.0")
+{
+count1++
+}
+}
+END {
+printf("%d\t%d", count1, count2);
+}

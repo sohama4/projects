@@ -1,0 +1,59 @@
+#!/usr/bin/awk -f
+BEGIN {
+intime=1
+countreceived1=0
+countreceived2=0
+latency1=0
+latency2=0
+}
+
+{
+  time = $2
+  if (time <= intime)
+  {
+    if($1 == "-" && $3 == 0 && $4 == 1 && $5 == "tcp" && $9 == "0.0" && $10 == "3.0")
+    {
+      starttime1[$11] = time
+    }
+
+    if($1 == "-" && $3 == 4 && $4 == 1 && $5 == "cbr" && $9 == "4.0" && $10 == "5.0")
+    {
+      starttime2[$12] = time
+    }
+  
+  
+    if($1 == "r" && $3 == 1 && $4 == 0 && $5 == "ack" && $9 == "3.0" && $10 == "0.0")
+    {
+      countreceived1+= 1
+      endtime1[$11] = time
+      latency1+= endtime1[$11] - starttime1[$11]
+    }
+
+    
+    if($1 == "r" && $3 == 2 && $4 == 5 && $5 == "cbr" && $9 == "4.0" && $10 == "5.0")
+    {
+      countreceived2+= 1
+      endtime2[$12] = time
+      latency2+= endtime2[$12] - starttime2[$12]
+    }
+  }
+  else
+  {
+	latency1= (latency1/countreceived1)*1000
+	if(countreceived2 > 0)
+	{
+	latency2= (latency2/countreceived2)*1000
+	}
+	printf("%f\t%f\n", latency1, latency2)
+	latency1 = 0
+	countreceived1 = 0
+	latency2 = 0
+	countreceived2 = 0
+    	intime+= 1
+  }
+}	
+
+END {
+
+}
+

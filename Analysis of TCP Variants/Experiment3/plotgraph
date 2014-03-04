@@ -1,0 +1,31 @@
+#!/bin/sh
+set terminal jpeg enhanced font helvetica 10
+set output "DroptailThroughput.jpg"
+set title "Throughput Comparison for all TCP Variants with DropTail queue"
+set xlabel "Time"
+set ylabel "Throughput (kbits/sec)"
+plot [1:60] "DropTailRenoThroughput.dat" u ($0+1):1 title "TCP Reno Thorughput" with lines, "DropTailSackThroughput.dat" u ($0+1):1 title "TCP SACK Thorughput" with lines, "DropTailRenoThroughput.dat" u ($0+1):2 title "CBR Throughput with TCP Reno" with lines, "DropTailSackThroughput.dat" u ($0+1):2 title "CBR Thorughput with TCP SACK" with lines
+
+
+set terminal jpeg enhanced font helvetica 10
+set output "RenoThroughput.jpg"
+set title "Throughput Comparison for all TCP Variants with RED queue"
+set xlabel "Time"
+set ylabel "Throughput(kbits/sec)"
+plot [1:60] "REDRenoThroughput.dat" u ($0+1):1 title "TCP Reno Thorughput" with lines, "REDSackThroughput.dat" u ($0+1):1 title "TCP Sack Throughput" with lines, "REDRenoThroughput.dat" u ($0+1):2 title "CBR Throughput with TCP Reno" with lines, "REDSackThroughput.dat" u ($0+1):2 title "CBR Thorughput with TCP SACK" with lines
+
+
+set terminal jpeg enhanced font helvetica 10
+set output "DropTailLatency.jpg"
+set title "Latency Comparison for all flows with DropTail queue"
+set xlabel "Time"
+set ylabel "Latency"
+plot [1:60] "DropTailRenoLatency.dat" u ($0+1):1 title "TCPReno Latency" with lines, "DropTailSackLatency.dat" u ($0+1):1 title "TCPSack Latency" with lines, "DropTailRenoLatency.dat" u ($0+1):2 title "CBR with TCPReno Latency" with lines, "DropTailSackLatency.dat" u ($0+1):2 title "CBR with TCP Sack Latency" with lines
+
+
+set terminal jpeg enhanced font helvetica 10
+set output "REDLatency.jpg"
+set title "Latency Comparison for all flows with RED queue"
+set xlabel "Time"
+set ylabel "Latency"
+plot [1:60] "REDRenoLatency.dat" u ($0+1):1 title "TCP Reno Latency" with lines, "REDSackLatency.dat" u ($0+1):1 title "TCP Sack Latency" with lines, "REDRenoLatency.dat" u ($0+1):2 title "CBR Latency with TCP Reno" with lines, "REDSackLatency.dat" u ($0+1):2 title "CBR Latency with TCP Sack" with lines

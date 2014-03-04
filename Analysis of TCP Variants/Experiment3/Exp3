@@ -1,0 +1,25 @@
+#!/bin/bash
+rm -f *~
+rm -f *.tr
+rm -f *.dat
+rm -f *.jpg
+
+ns DropTailReno.tcl
+./latency *.tr >> DropTailRenoLatency.dat
+./throughput *.tr >> DropTailRenoThroughput.dat
+rm -f *.tr
+ns DropTailSack.tcl
+./latency *.tr >> DropTailSackLatency.dat
+./throughput *.tr >> DropTailSackThroughput.dat
+rm -f *.tr
+ns REDReno.tcl
+./latency *.tr >> REDRenoLatency.dat
+./throughput *.tr >> REDRenoThroughput.dat
+rm -f *.tr
+ns REDSack.tcl
+./latency *.tr >> REDSackLatency.dat
+./throughput *.tr >> REDSackThroughput.dat
+rm -f *.tr
+gnuplot plotgraph
+echo "Graphs generated in .jpg format in /Experiment3"
+

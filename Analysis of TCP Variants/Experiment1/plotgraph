@@ -1,0 +1,24 @@
+#!/bin/sh
+set terminal jpeg enhanced font helvetica 10
+set output "Throughput.jpg"
+set title "Throughput Comparison for all TCP Variants"
+set xlabel "CBR Rate in Megabits/second"
+set ylabel "Throughput"
+plot [1:10] "TahoeThroughput.dat" u ($0+1):1 title "Tahoe Thorughput" with linespoints, "VegasThroughput.dat" u ($0+1):1 title "Vegas Thorughput" with linespoints, "RenoThroughput.dat" u ($0+1):1 title "Reno Throughput" with linespoints, "NewrenoThroughput.dat" u ($0+1):1 title "Newreno Thorughput" with linespoints
+
+
+set terminal jpeg enhanced font helvetica 10
+set output "Latency.jpg"
+set title "Latency Comparison for all TCP Variants"
+set xlabel "CBR Rate in Megabits/second"
+set ylabel "Latency"
+plot [1:10] "TahoeLatency.dat" u ($0+1):1 title "Tahoe Latency" with linespoints, "VegasLatency.dat" u ($0+1):1 title "Vegas Latency" with linespoints, "RenoLatency.dat" u ($0+1):1 title "Reno Latency" with linespoints, "NewrenoLatency.dat" u ($0+1):1 title "Newreno Latency" with linespoints
+
+set terminal jpeg enhanced font helvetica 10
+set output "Dropcount.jpg"
+set title "Dropcount Comparison for all TCP Variants"
+set xlabel "CBR Rate in Megabits/second"
+set ylabel "Dropcount"
+plot [1:10] "TahoeDropcount.dat" u ($0+1):1 title "Tahoe Dropcount" with linespoints, "VegasDropcount.dat" u ($0+1):1 title "Vegas Dropcount" with linespoints, "RenoDropcount.dat" u ($0+1):1 title "Reno Dropcount" with linespoints, "NewrenoDropcount.dat" u ($0+1):1 title "Newreno Dropcount" with linespoints
+
+
