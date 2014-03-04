@@ -1,0 +1,4 @@
+#!/bin/sh
+
+javac webcrawler.java
+java webcrawler $1 $2

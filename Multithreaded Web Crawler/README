@@ -1,0 +1,30 @@
+Team members: Kapil Deshpande, Soham Aurangabadkar
+
+High level approach: 
+
+1. Login to the website using an HTTP POST request, using the csrftoken and sessionid provided by the /account/login page
+2. Obtain the home page of the logged in user at /fakebook/ using the sessionid the server provides
+3. Parse the URLs on /fakebook/ using an external HTML parsing API Jsoup-1.7.3. Store the URLs in a static LinkedBlockingQueue queue
+4. Spawn a thread for each URL in queue, and send an HTTP GET request to each, and add it to visited, which is a static HashSet<String> to
+   maintain track of the URLs parsed so far
+5. Simultaneously search for the secret flag using the class "secret_flag" in the <h2> tag in each HTML page obtained after the GET request
+6. If a flag is found, increment the flagCounter till 5 flags are found so that it can be used as a breaking condition
+7. If the GET request returns an HTTP response with a status code other than 200, that is between 300-400, it is a redirect. Get the location
+   of the redirect and traverse that location
+8. If the GET request returns an HTTP response with a status code between 400-500, it is a fatal error and webcrawler terminates
+9. If the GET request returns an HTTP response with a status code as 500 or above, it is a server error, most commonly INTERNAL SERVER ERROR.
+   In this case, do not add the URL to the visited HashSet as it is not traversed, and again enqueue the URL in queue
+10. The crawler will terminate when all 5 flags are found, or when the queue is empty, ie no more URLs are traversed
+
+Challenges:
+1. Implementing two data structures for holding URLs
+2. Designing the HTTP requests using the csrftoken and the sessionid
+3. Multithreading, and making the data structures concurrency-safe
+4. Parsing the HTTP responses
+5. Handling all response codes for the responses
+
+Tests:
+1. 5 secret flags received
+2. Secret flags different for each team member
+3. HTTP GET and POST requests were successfully logging into fakebook
+ 
