@@ -1,0 +1,18 @@
+Team members: Kapil Deshpande and Soham Aurangabadkar
+
+Approach: 
+1. Validate the input and decide whether SSL is to be used or not.
+2. Based on that, create a connection to server using hostname and appropriate port number using either the Socket or SSLSocketFactory APIs provided by Java.
+3. Iterate messages to the server, stopping when the server returns either a corrupted message or a message containing "BYE".
+4. Print the secret_flag received.
+
+Challenges faced:
+1. Using certificates to successfully ensure SSL.
+2. Using the SSLSocketFactory API
+3. Modifying the cipher suites supported by the SSLSocketFactory API
+
+Tests:
+1. Various permutations of the input arguments
+2. The secret_flag for SSL and normal communication differs
+3. STATUS messages were in their proper formats
+4. For variations in NUIDs the server returns the proper error message

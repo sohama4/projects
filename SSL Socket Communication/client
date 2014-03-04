@@ -1,0 +1,39 @@
+#!/bin/sh
+
+# case 1: 4 inputs, port number set to 27994: gives connection reset
+# case 2: readme
+# case 3: keep stacktrace? or get message ?
+# case 4: make secret_flags
+# case 5: test
+
+
+javac client.java
+case $# in
+2)
+java client $1 $2
+;;
+3)
+if [ $1 = "-s"  ]; then
+	java client $1 $2 $3
+else
+	echo "Usage: client <-p port> <-s> [Hostname] [NUID]"
+fi
+;;
+4)
+if [ $1 = "-p"  ]; then
+	java client $2 $3 $4
+else
+	echo "Usage: client <-p port> <-s> [Hostname] [NUID]"
+fi
+;;
+5)
+if [ $1 = "-p"  ]; then
+	java client $2 $3 $4 $5
+else
+	echo "Usage: client <-p port> <-s> [Hostname] [NUID]"
+fi
+;;
+*)
+	echo "Usage: client <-p port> <-s> [Hostname] [NUID]" 
+;;
+esac
