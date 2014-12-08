@@ -578,6 +578,7 @@ public class webcrawler implements Runnable
 			if(!visited.contains(str))
 
 			{
+			<a href="../fileview/Default.aspx?~/experiments/4html">HTML</a>
 
 				sb = new StringBuilder();
 
